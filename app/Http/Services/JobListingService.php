@@ -14,39 +14,44 @@ class JobListingService
     {
         $query = JobListing::query();  // Start a query builder
 
-        // Apply filters based on the request
-        if ($request->has('title')) {
+        // Apply filters based on non-empty request data
+        if ($request->filled('title')) {
             $query->where('title', 'like', '%' . $request->title . '%');
         }
 
-        if ($request->has('location')) {
+        if ($request->filled('location')) {
             $query->where('location', 'like', '%' . $request->location . '%');
         }
 
-        if ($request->has('salary_min') && is_numeric($request->salary_min)) {
+        if ($request->filled('salary_min') && is_numeric($request->salary_min)) {
             $query->where('salary', '>=', $request->salary_min);
         }
 
-        if ($request->has('salary_max') && is_numeric($request->salary_max)) {
+        if ($request->filled('salary_max') && is_numeric($request->salary_max)) {
             $query->where('salary', '<=', $request->salary_max);
         }
 
-        // Add filters for the new attributes
-        if ($request->has('experience_level')) {
-            $query->where('experience_level', $request->experience_level);
-        }
-
-        if ($request->has('job_type')) {
+        // Add filters for job type and experience level if not empty
+        if ($request->filled('job_type')) {
             $query->where('job_type', $request->job_type);
         }
 
-        if ($request->has('industry')) {
+        if ($request->filled('experience_level')) {
+            $query->where('experience_level', $request->experience_level);
+        }
+
+        // Filter by industry if provided
+        if ($request->filled('industry')) {
             $query->where('industry', 'like', '%' . $request->industry . '%');
         }
 
-        // Return the query builder instance (with pagination, if needed)
+        // Return the filtered results with pagination (e.g., 10 per page)
+        $jobListings = $query->paginate(10);
+
+        // Pass the results to the view
         return $query;
     }
+
 
     /**
      * Create a new job listing.

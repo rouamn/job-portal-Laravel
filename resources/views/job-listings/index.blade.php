@@ -18,16 +18,36 @@
     <form action="{{ route('job-listings.index') }}" method="GET" id="searchForm">
         <div class="row">
             <div class="col-md-3">
-                <input type="text" name="title" class="form-control" placeholder="Search by title" value="{{ request('title') }}" id="titleInput">
+                <input type="text" name="title" class="form-control" placeholder="Search by title" value="{{ request('title') }}" id="titleInput" oninput="submitForm()">
             </div>
             <div class="col-md-3">
-                <input type="text" name="location" class="form-control" placeholder="Search by location" value="{{ request('location') }}" id="locationInput">
+                <input type="text" name="location" class="form-control" placeholder="Search by location" value="{{ request('location') }}" id="locationInput" oninput="submitForm()">
             </div>
             <div class="col-md-2">
-                <input type="number" name="salary_min" class="form-control" placeholder="Min Salary" value="{{ request('salary_min') }}" id="salaryMinInput">
+                <input type="number" name="salary_min" class="form-control" placeholder="Min Salary" value="{{ request('salary_min') }}" id="salaryMinInput" oninput="submitForm()">
             </div>
             <div class="col-md-2">
-                <input type="number" name="salary_max" class="form-control" placeholder="Max Salary" value="{{ request('salary_max') }}" id="salaryMaxInput">
+                <input type="number" name="salary_max" class="form-control" placeholder="Max Salary" value="{{ request('salary_max') }}" id="salaryMaxInput" oninput="submitForm()">
+            </div>
+
+            <!-- Experience Level Filter -->
+            <div class="col-md-2">
+                <select name="experience_level" class="form-control" id="experienceLevelInput" onchange="submitForm()">
+                    <option value="">Select Experience Level</option>
+                    <option value="junior" {{ request('experience_level') == 'junior' ? 'selected' : '' }}>Junior</option>
+                    <option value="mid" {{ request('experience_level') == 'mid' ? 'selected' : '' }}>Mid-level</option>
+                    <option value="senior" {{ request('experience_level') == 'senior' ? 'selected' : '' }}>Senior</option>
+                </select>
+            </div>
+
+            <!-- Job Type Filter -->
+            <div class="col-md-2">
+                <select name="job_type" class="form-control" id="jobTypeInput" onchange="submitForm()">
+                    <option value="">Select Job Type</option>
+                    <option value="full-time" {{ request('job_type') == 'full-time' ? 'selected' : '' }}>Full-time</option>
+                    <option value="part-time" {{ request('job_type') == 'part-time' ? 'selected' : '' }}>Part-time</option>
+                    <option value="freelance" {{ request('job_type') == 'freelance' ? 'selected' : '' }}>Freelance</option>
+                </select>
             </div>
         </div>
     </form>
@@ -83,18 +103,12 @@
         </ul>
     </nav>
 </div>
+
 <script>
-    let timeout;
-
-    document.querySelectorAll('#searchForm input').forEach(function(input) {
-        input.addEventListener('input', function() {
-            clearTimeout(timeout);  // Clear the previous timeout
-            timeout = setTimeout(function() {
-                document.getElementById('searchForm').submit();  // Submit the form after typing stops
-            }, 500);  // Wait for 500ms after the last key press
-        });
-    });
+    // JavaScript function to submit the form on input change
+    function submitForm() {
+        document.getElementById('searchForm').submit(); // Automatically submit the form
+    }
 </script>
-
 
 @endsection
