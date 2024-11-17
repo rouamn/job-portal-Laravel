@@ -113,7 +113,12 @@ php artisan test
 
 #### 1. User Registration Page
 
-![User Registration](resources/jobs.PNG)
+![User Registration](resources/register.PNG)
+![Login ](resources/login.PNG)
+![Job Listings ](resources/joblisting.PNG)
+![Job Creation Form  ](resources/jobCreation.PNG)
+![Job Update Form  ](resources/edit.PNG)
+![Job details   ](resources/show.PNG)
 
 
 ## Additional Notes
