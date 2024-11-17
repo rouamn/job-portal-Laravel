@@ -113,7 +113,7 @@ php artisan test
 
 #### 1. User Registration Page
 
-![User Registration](resources/jobs.png)
+![User Registration](resources/jobs.PNG)
 
 
 ## Additional Notes

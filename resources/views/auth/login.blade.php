@@ -3,8 +3,7 @@
 @section('title', 'Login')
 
 @section('content')
-
-    <div class="row justify-content-center">
+    <div class="container" style="height: 100vh; display: flex; justify-content: center; align-items: center;">
         <div class="col-md-4">
             <div class="card">
                 <div class="text-center">
@@ -13,19 +12,17 @@
                 <div class="card-body">
                     <!-- Display Global Errors -->
                     @if ($errors->any())
-                    <div role="alert" style="color: red; display: flex; align-items: center;">
-                        <i class="fas fa-exclamation-circle me-2" style="color: red;"></i>
-                        <strong>Oops!</strong> Please check your input and try again.
-                    </div>
-                @endif
-
-
+                        <div role="alert" style="color: red; display: flex; align-items: center;">
+                            <i class="fas fa-exclamation-circle me-2" style="color: red;"></i>
+                            <strong>Oops!</strong> Please check your input and try again.
+                        </div>
+                    @endif
 
                     <form action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="mb-4">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="johndoe@example.com" value="{{ old('email') }}" >
+                            <input type="email" name="email" id="email" class="form-control" placeholder="johndoe@example.com" value="{{ old('email') }}">
                             @error('email')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -34,7 +31,7 @@
                         <div class="mb-4">
                             <label for="password" class="form-label">Password</label>
                             <div class="input-group">
-                                <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" >
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password">
                                 <span class="input-group-text bg-transparent border-0">
                                     <i class="bi bi-eye"></i>
                                 </span>

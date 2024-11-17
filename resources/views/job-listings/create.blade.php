@@ -4,26 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Job Listing</title>
-    <!-- Bootstrap CSS CDN -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     @include('partials.navbar')
 
     <div class="container mt-5">
-        <!-- Card for creating the job listing with a smaller size -->
         <div class="card shadow-sm" style="max-width: 800px; margin: 0 auto; padding: 5px;">
             <div class="card-header">
                 <h2>Create Job Listing</h2>
             </div>
-
-           
-
-            <!-- Job Listing Form -->
             <form action="{{ route('job-listings.store') }}" method="POST">
                 @csrf
-
-                <!-- Row for Job Title and Company Name (Same Line) -->
                 <div class="form-row mb-3">
                     <div class="form-group col-md-6">
                         <label for="title">Job Title</label>
@@ -42,8 +34,6 @@
                         @enderror
                     </div>
                 </div>
-
-                <!-- Row for Job Description and Location -->
                 <div class="form-row mb-3">
                     <div class="form-group col-md-12">
                         <label for="description">Job Description</label>
@@ -53,8 +43,6 @@
                         @enderror
                     </div>
                 </div>
-
-                <!-- Row for Location and Salary -->
                 <div class="form-row mb-3">
                     <div class="form-group col-md-6">
                         <label for="location">Location</label>
@@ -73,7 +61,6 @@
                     </div>
                 </div>
 
-                <!-- Row for Experience Level and Industry -->
                 <div class="form-row mb-3">
                     <div class="form-group col-md-6">
                         <label for="experience_level">Experience Level</label>
@@ -97,8 +84,6 @@
                         @enderror
                     </div>
                 </div>
-
-                <!-- Row for Job Type -->
                 <div class="form-group mb-3">
                     <label for="job_type">Job Type</label>
                     <select id="job_type" name="job_type" class="form-control @error('job_type') is-invalid @enderror">
@@ -111,13 +96,10 @@
                     @enderror
                 </div>
 
-                <!-- Submit Button -->
                 <button type="submit" class="btn btn-primary w-100">Create Listing</button>
             </form>
         </div>
     </div>
-
-    <!-- Bootstrap JS and Popper.js (optional, for responsive features) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

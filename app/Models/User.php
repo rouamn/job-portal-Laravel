@@ -1,14 +1,12 @@
 <?php
 
 namespace App\Models;
-
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject // Implementing the interface
+class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
 
@@ -31,13 +29,12 @@ class User extends Authenticatable implements JWTSubject // Implementing the int
         ];
     }
 
-    // This method returns the user identifier to be included in the JWT.
+
     public function getJWTIdentifier()
     {
-        return $this->getKey(); // Typically, it's the user's primary key (ID)
+        return $this->getKey();
     }
 
-    // This method returns any custom claims for the JWT.
     public function getJWTCustomClaims()
     {
         return [];

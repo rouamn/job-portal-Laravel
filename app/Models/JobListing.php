@@ -8,10 +8,8 @@ class JobListing extends Model
 {
     use HasFactory;
 
-    // Define the table associated with the model (optional if table name matches the plural form of the model name)
     protected $table = 'job_listings';
 
-    // Define the attributes that are mass assignable
     protected $fillable = [
         'title',
         'description',
@@ -19,7 +17,7 @@ class JobListing extends Model
         'location',
         'salary',
         'experience_level',
-        'job_type',          
+        'job_type',
         'industry',
         'user_id',
     ];
@@ -31,6 +29,6 @@ class JobListing extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class);  // Each job listing belongs to one user
+        return $this->belongsTo(User::class);  
     }
 }

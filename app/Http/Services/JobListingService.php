@@ -12,9 +12,8 @@ class JobListingService
      */
     public function getFilteredJobListings(Request $request)
     {
-        $query = JobListing::query();  // Start a query builder
+        $query = JobListing::query();
 
-        // Apply filters based on non-empty request data
         if ($request->filled('title')) {
             $query->where('title', 'like', '%' . $request->title . '%');
         }
@@ -31,7 +30,6 @@ class JobListingService
             $query->where('salary', '<=', $request->salary_max);
         }
 
-        // Add filters for job type and experience level if not empty
         if ($request->filled('job_type')) {
             $query->where('job_type', $request->job_type);
         }
@@ -40,15 +38,12 @@ class JobListingService
             $query->where('experience_level', $request->experience_level);
         }
 
-        // Filter by industry if provided
         if ($request->filled('industry')) {
             $query->where('industry', 'like', '%' . $request->industry . '%');
         }
 
-        // Return the filtered results with pagination (e.g., 10 per page)
         $jobListings = $query->paginate(10);
 
-        // Pass the results to the view
         return $query;
     }
 
@@ -62,7 +57,7 @@ class JobListingService
         $validated = $this->validateJobListing($request);
 
         if ($validated->fails()) {
-            return response()->json($validated->errors(), 400); // or handle differently
+            return response()->json($validated->errors(), 400);
         }
 
         return JobListing::create([
@@ -71,10 +66,11 @@ class JobListingService
             'company_name' => $request->company_name,
             'location' => $request->location,
             'salary' => $request->salary,
-            'experience_level' => $request->experience_level,  // Add new attribute
-            'job_type' => $request->job_type,                  // Add new attribute
-            'industry' => $request->industry,                  // Add new attribute
-            'user_id' => $request->user()->id,  // Ensure user_id is correctly obtained from the authenticated user
+            'experience_level' => $request->experience_level,
+            'job_type' => $request->job_type,
+            'industry' => $request->industry,
+            'user_id' => $request->user()->id,
+
         ]);
     }
 
@@ -87,7 +83,7 @@ class JobListingService
         $validated = $this->validateJobListing($request);
 
         if ($validated->fails()) {
-            return response()->json($validated->errors(), 400); // or handle differently
+            return response()->json($validated->errors(), 400);
         }
 
         $jobListing->update([
@@ -96,10 +92,10 @@ class JobListingService
             'company_name' => $request->company_name,
             'location' => $request->location,
             'salary' => $request->salary,
-            'experience_level' => $request->experience_level,  // Add new attribute
-            'job_type' => $request->job_type,                  // Add new attribute
-            'industry' => $request->industry,                  // Add new attribute
-            'user_id' => $request->user()->id,  // Ensure user_id is correctly obtained from the authenticated user
+            'experience_level' => $request->experience_level,
+            'job_type' => $request->job_type,
+            'industry' => $request->industry,
+            'user_id' => $request->user()->id,
         ]);
     }
 
@@ -122,9 +118,10 @@ class JobListingService
             'company_name' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'salary' => 'required|numeric|min:0',
-            'experience_level' => 'nullable|string|in:junior,mid,senior,expert', // Validation for experience level
-            'industry' => 'nullable|string|max:255', // Validation for industry
+            'experience_level' => 'nullable|string|in:junior,mid,senior,expert',
+            'industry' => 'nullable|string|max:255',
             'job_type' => 'nullable|string|in:full-time,part-time,contract,internship',
+
         ]);
     }
 }

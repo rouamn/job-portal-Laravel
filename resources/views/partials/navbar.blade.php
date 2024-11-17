@@ -1,4 +1,4 @@
-<!-- resources/views/partials/navbar.blade.php -->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ url('/') }}">Job Listings</a>
@@ -7,7 +7,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <!-- Log In / Log Out links -->
+        
                 @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">Log In</a>

@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="row justify-content-center">
+    <div class="container" style="height: 100vh; display: flex; justify-content: center; align-items: center;">
         <div class="col-md-4">
             <div class="card">
                 <div class="text-center">
@@ -62,4 +62,5 @@
             </div>
         </div>
     </div>
+
 @endsection
